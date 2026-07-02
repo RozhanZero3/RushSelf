@@ -1,0 +1,23 @@
+{% extends 'canteen/base.html' %}
+{% load shamsi %}
+
+{% block content %}
+    <div class="card">
+        {% if payment_method == 'online' %}
+            <h2>پرداخت آنلاین</h2>
+            <p>برای پرداخت آنلاین روی دکمه زیر کلیک کنید:</p>
+            <a class="button" href="#">پرداخت آنلاین</a>
+            <p><small>این لینک نمونه است. در نسخه نهایی باید درگاه پرداخت واقعی متصل شود.</small></p>
+        {% else %}
+            <h2>پرداخت حضوری</h2>
+            <p>آدرس سلف:</p>
+            <p>ساختمان مرکزی دانشگاه، طبقه همکف، سالن سلف</p>
+            <p>شماره تماس: ۰۱۲۳۴۵۶۷۸۹</p>
+        {% endif %}
+        <div class="card">
+            <h3>جزئیات سفارش</h3>
+            <p>تاریخ سرو: {{ order.menu.date|shamsi_date }}</p>
+            <p>شماره تماس: {{ order.phone }}</p>
+        </div>
+    </div>
+{% endblock %}

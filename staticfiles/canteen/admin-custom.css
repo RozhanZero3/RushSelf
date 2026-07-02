@@ -1,0 +1,36 @@
+/* Simple admin overrides to use purple theme */
+body, .module caption {
+    font-family: Tahoma, sans-serif;
+}
+#header, #user-tools, .module h2 {
+    background: linear-gradient(90deg,#45286a,#5e3a8a) !important;
+}
+a, .breadcrumbs a {
+    color: #fff !important;
+}
+.field-box, .grp-module, .module {
+    border-radius: 8px; box-shadow: 0 6px 18px rgba(94,58,138,0.06);
+}
+
+/* make admin tables a bit nicer */
+.results th, .results td {
+    padding: .6rem .8rem;
+}
+
+/* make admin forms look card-like and responsive */
+.container, .module {
+    background: linear-gradient(180deg,#fff,#fbf8ff);
+    border: 1px solid #f0eaf8;
+}
+
+@media (max-width:800px){
+    .grp-main, .grp-sidebar {
+        width:100% !important; float:none !important;
+    }
+}
+
+.submit-row .default {
+    background: #5e3a8a; color: white; border: none; padding: .6rem .9rem; border-radius: 6px;
+}
+
+.module h2 { color: #fff }

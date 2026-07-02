@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'canteen/admin-custom.css' %}">
+{% endblock %}
+
+{% block title %}پنل مدیریت - سامانه سلف{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">سامانه سلف دانشگاه</a></h1>
+{% endblock %}

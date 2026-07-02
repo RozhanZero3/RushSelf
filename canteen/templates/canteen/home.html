@@ -1,0 +1,37 @@
+{% extends 'canteen/base.html' %}
+{% load shamsi %}
+{% load currency %}
+
+{% block content %}
+    <div class="card">
+        <h2>منوی هفتگی و روزانه</h2>
+        <p>مدیریت می‌تواند منو را در بخش مدیریت به روز کند. دانشجو می‌تواند سفارش را حداقل دو روز قبل ثبت کند.</p>
+    </div>
+
+    {% if upcoming_menus %}
+        {% for menu in upcoming_menus %}
+            <div class="card">
+                <h3>{{ menu.date|shamsi_date }} - {{ menu.date|shamsi_weekday }}</h3>
+                {% if menu.items.exists %}
+                    <div class="menu-grid">
+                        {% for item in menu.items.all %}
+                            <div class="menu-card">
+                                <h4>{{ item.name }}</h4>
+                                <p class="muted">{{ item.price|currency }}</p>
+                                {% if item.is_vegetarian %}<small class="muted">گیاهی</small>{% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="button" href="{% url 'canteen:order_create' menu_date=menu.date|date:'Y-m-d' %}">ثبت سفارش</a>
+                {% else %}
+                    <p>برای این روز هنوز منویی ثبت نشده است.</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="card">
+            <p>هنوز منوی جدیدی برای روزهای آینده ثبت نشده است.</p>
+            <p>در پنل مدیریت یک منوی روزانه با تاریخ آینده بسازید و غذاهای مرتبط را به آن اضافه کنید تا دانشجو بتواند مشاهده و سفارش دهد.</p>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'canteen/base.html' %}
+{% load shamsi %}
+
+{% block content %}
+    <div class="card">
+        <h2>منوی {{ menu.date|shamsi_date }} - {{ menu.date|shamsi_weekday }}</h2>
+        {% if menu.items.exists %}
+            <div class="menu-grid">
+                {% for item in menu.items.all %}
+                    <div class="menu-card">
+                        <h4>{{ item.name }}</h4>
+                        <p class="muted">{{ item.price|currency }}</p>
+                        {% if item.description %}<p class="muted">{{ item.description }}</p>{% endif %}
+                        {% if item.is_vegetarian %}<small class="muted">گیاهی</small>{% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div style="margin-top:1rem">
+                <a class="button" href="{% url 'canteen:order_create' menu_date=menu.date|date:'Y-m-d' %}">ثبت سفارش برای این روز</a>
+            </div>
+        {% else %}
+            <p>برای این روز منویی تعریف نشده است.</p>
+        {% endif %}
+    </div>
+{% endblock %}

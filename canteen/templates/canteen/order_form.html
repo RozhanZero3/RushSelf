@@ -1,0 +1,55 @@
+{% extends 'canteen/base.html' %}
+{% load shamsi %}
+
+{% block content %}
+    <div class="card">
+        <h2>ثبت سفارش برای {{ menu.date|shamsi_date }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.menu_date }}
+
+                <div class="field">
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
+                </div>
+                <div class="field">
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
+                </div>
+                <div class="field">
+                    {{ form.student_id.label_tag }}
+                    {{ form.student_id }}
+                </div>
+                <div class="field">
+                    {{ form.phone.label_tag }}
+                    {{ form.phone }}
+                </div>
+
+                <h3>غذاهای منو</h3>
+                {% for item in menu.items.all %}
+                    <div class="field">
+                        <label>
+                            <input type="checkbox" name="items" value="{{ item.id }}"> {{ item.name }} - {{ item.price|currency }}
+                        </label>
+                        <div>
+                            تعداد: <input type="number" name="quantity_{{ item.id }}" value="1" min="1" style="width:60px">
+                        </div>
+                        <div>
+                            <small>مخلفات برای این غذا:</small>
+                            {% for extra in form.extras.field.queryset %}
+                                <label style="margin-left:8px">
+                                    <input type="checkbox" name="extras_for_{{ item.id }}" value="{{ extra.id }}"> {{ extra.name }} (+{{ extra.price }} تومان)
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="field">
+                    {{ form.note.label_tag }}
+                    {{ form.note }}
+                </div>
+            <button class="button" type="submit">ثبت سفارش</button>
+        </form>
+    </div>
+{% endblock %}

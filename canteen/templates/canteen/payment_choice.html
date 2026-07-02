@@ -1,0 +1,18 @@
+{% extends 'canteen/base.html' %}
+
+{% block content %}
+    <div class="card">
+        <h2>انتخاب نوع پرداخت</h2>
+        <p>لطفا روش پرداخت را انتخاب کنید:</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="field">
+                <label><input type="radio" name="payment_method" value="online" checked> پرداخت آنلاین</label>
+            </div>
+            <div class="field">
+                <label><input type="radio" name="payment_method" value="offline"> پرداخت حضوری</label>
+            </div>
+            <button class="button" type="submit">ادامه</button>
+        </form>
+    </div>
+{% endblock %}

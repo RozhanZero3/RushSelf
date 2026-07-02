@@ -1,0 +1,19 @@
+{% extends 'canteen/base.html' %}
+{% load shamsi %}
+
+{% block content %}
+    <div class="card">
+        <h2>سفارش با موفقیت ثبت شد</h2>
+        <p>کد رهگیری شما:</p>
+        <p><strong>{{ order.tracking_code }}</strong></p>
+        <p>برای پیگیری وضعیت سفارش، می‌توانید این کد و شماره تماس خود را نگهدارید.</p>
+        <ul>
+            <li>نام: {{ order.first_name }} {{ order.last_name }}</li>
+            <li>شماره دانشجویی: {{ order.student_id }}</li>
+            <li>شماره تماس: {{ order.phone }}</li>
+            <li>تاریخ منو: {{ order.menu.date|shamsi_date }}</li>
+            <li>حالت پرداخت: {{ order.get_status_display }}</li>
+        </ul>
+        <a class="button" href="{% url 'canteen:track_order' %}">پیگیری سفارش</a>
+    </div>
+{% endblock %}

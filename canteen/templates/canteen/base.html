@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>سامانه مدیریت سلف دانشگاه</title>
+    <style>
+        :root{
+            --bg:#f6f5fb;
+            --card:#ffffff;
+            --text:#222;
+            --purple:#5e3a8a;
+            --purple-dark:#45286a;
+            --muted:#6b6b7a;
+        }
+        *{box-sizing:border-box}
+        body { font-family: Tahoma, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; direction: rtl; }
+        header, footer { background: linear-gradient(90deg,var(--purple-dark),var(--purple)); color: white; padding: 1rem; }
+        nav a { color: white; margin-right: 1rem; text-decoration: none; }
+        main { padding: 1.5rem; max-width: 1100px; margin: 0 auto; }
+        .card { background: var(--card); padding: 1.2rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 6px 18px rgba(94,58,138,0.08); }
+        .button { display: inline-block; background: var(--purple); color: white; padding: .7rem 1.1rem; border-radius: 8px; text-decoration: none; border: none; }
+        .button:hover { background: var(--purple-dark); }
+        .field { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: .3rem; color: var(--muted); }
+        input, textarea, select { width: 100%; padding: .7rem; border: 1px solid #e6e3f2; border-radius: 6px; }
+        .errorlist { color: #b71c1c; margin: 0 0 .8rem 0; padding: 0; list-style: none; }
+        /* card-style menu list */
+        .menu-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:1rem }
+        .menu-card{ padding:1rem; border-radius:8px; background:linear-gradient(180deg,#fff, #fbf8ff); border:1px solid #f0eaf8 }
+        .menu-card h4{ margin:0 0 .5rem }
+        .muted{ color:var(--muted) }
+
+        /* responsive tweaks */
+        @media (max-width:600px){
+            header, footer { text-align:center }
+            nav a{ display:inline-block; margin:6px }
+            main{ padding:1rem }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>سامانه مدیریت سلف دانشگاه</h1>
+        <nav>
+            <a href="{% url 'canteen:home' %}">صفحه اصلی</a>
+            <a href="{% url 'canteen:track_order' %}">پیگیری سفارش</a>
+            <a href="/admin/">ورود مدیریت</a>
+        </nav>
+    </header>
+    <main>
+        {% if messages %}
+            <div class="card">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>دانشگاه | سیستم سفارش غذای سلف | پایگاه داده SQLite</p>
+    </footer>
+</body>
+</html>
